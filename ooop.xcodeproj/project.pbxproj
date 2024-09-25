@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BDC8C6EB2CA437D400196EB5 /* ooop */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ooop; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDC8C6F82CA43A0800196EB5 /* ooop */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ooop; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -45,16 +45,8 @@
 			isa = PBXGroup;
 			children = (
 				BDC8C6ED2CA437D400196EB5 /* ooop */,
-				BDC8C6EC2CA437D400196EB5 /* Products */,
+				BDC8C6F82CA43A0800196EB5 /* ooop */,
 			);
-			sourceTree = "<group>";
-		};
-		BDC8C6EC2CA437D400196EB5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BDC8C6EB2CA437D400196EB5 /* ooop */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,7 +71,7 @@
 			packageProductDependencies = (
 			);
 			productName = ooop;
-			productReference = BDC8C6EB2CA437D400196EB5 /* ooop */;
+			productReference = BDC8C6F82CA43A0800196EB5 /* ooop */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -93,6 +85,7 @@
 				TargetAttributes = {
 					BDC8C6EA2CA437D400196EB5 = {
 						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 1600;
 					};
 				};
 			};
@@ -106,7 +99,7 @@
 			mainGroup = BDC8C6E22CA437D400196EB5;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = BDC8C6EC2CA437D400196EB5 /* Products */;
+			productRefGroup = BDC8C6E22CA437D400196EB5;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -244,16 +237,21 @@
 		BDC8C6F32CA437D400196EB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		BDC8C6F42CA437D400196EB5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
