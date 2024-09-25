@@ -20,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		BDC8C6F82CA43A0800196EB5 /* ooop */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ooop; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDC8C6FA2CA43ADF00196EB5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +45,7 @@
 		BDC8C6E22CA437D400196EB5 = {
 			isa = PBXGroup;
 			children = (
+				BDC8C6FA2CA43ADF00196EB5 /* .gitignore */,
 				BDC8C6ED2CA437D400196EB5 /* ooop */,
 				BDC8C6F82CA43A0800196EB5 /* ooop */,
 			);
