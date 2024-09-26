@@ -368,7 +368,121 @@ void list<T>::removeAt(int index) {
    }
 }
 
+//cписок на основі масиву
+template<typename T>
+class ArrayList {
+public:
+    ArrayList();
+    ~ArrayList();
+    
+    void push_back(T value);   // Додавання елемента в кінець
+    void insert(T value, int index); // Вставка елемента в заданий індекс
+    void removeAt(int index);  // Видалення елемента за індексом
+    void pop_back();           // Видалення останнього елемента
+    int size() const;          // Повертає кількість елементів у списку
+    T& operator[](int index);  // Оператор доступу до елемента за індексом
+    
+private:
+    void resize(); // Допоміжний метод для розширення масиву
 
+    T* data;
+    int capacity;
+    int currentSize;
+};
+
+// Конструктор
+template<typename T>
+ArrayList<T>::ArrayList() {
+    capacity = 10;
+    currentSize = 0;
+    data = new T[capacity];
+}
+
+// Деструктор
+template<typename T>
+ArrayList<T>::~ArrayList() {
+    delete[] data;
+}
+
+// Додавання елемента в кінець списку
+template<typename T>
+void ArrayList<T>::push_back(T value) {
+    if (currentSize == capacity) {
+        resize();
+    }
+    data[currentSize++] = value;
+}
+
+// Вставка елемента за індексом
+template<typename T>
+void ArrayList<T>::insert(T value, int index) {
+    if (index < 0 || index > currentSize) {
+        throw out_of_range("Індекс поза межами списку");
+    }
+
+    if (currentSize == capacity) {
+        resize();
+    }
+
+    for (int i = currentSize; i > index; i--) {
+        data[i] = data[i - 1];
+    }
+
+    data[index] = value;
+    currentSize++;
+}
+
+// Видалення елемента за індексом
+template<typename T>
+void ArrayList<T>::removeAt(int index) {
+    if (index < 0 || index >= currentSize) {
+        throw out_of_range("Індекс поза межами списку");
+    }
+
+    for (int i = index; i < currentSize - 1; i++) {
+        data[i] = data[i + 1];
+    }
+
+    currentSize--;
+}
+
+// Видалення останнього елемента
+template<typename T>
+void ArrayList<T>::pop_back() {
+    if (currentSize > 0) {
+        currentSize--;
+    }
+}
+
+// Повертає кількість елементів у списку
+template<typename T>
+int ArrayList<T>::size() const {
+    return currentSize;
+}
+
+// Оператор доступу до елемента за індексом
+template<typename T>
+T& ArrayList<T>::operator[](int index) {
+    if (index < 0 || index >= currentSize) {
+        throw out_of_range("Індекс поза межами списку");
+    }
+
+    return data[index];
+}
+
+// Допоміжний метод для розширення масиву
+template<typename T>
+void ArrayList<T>::resize() {
+    capacity *= 2;
+    T* newData = new T[capacity];
+
+    for (int i = 0; i < currentSize; i++) {
+        newData[i] = data[i];
+    }
+
+    delete[] data;
+    data = newData;
+}
 
 
 int main()
@@ -429,7 +543,7 @@ int main()
   lst.clear();
    cout << "Розмір після очищення: " << lst.GetSize() << endl;
 */
-    list<int> lstt;
+  /*  list<int> lstt;
 
     // Додавання елементів в кінець
     lstt.push_back(10);
@@ -485,8 +599,52 @@ int main()
     lstt.clear();
     cout << "Розмір після очищення: " << lstt.size() << endl;
 
+ */
+    
+   
+        
+        ArrayList<int> list;
+
  
-    
-    
+        list.push_back(10);
+        list.push_back(20);
+        list.push_back(30);
+        cout << "Елементи після додавання в кінець: ";
+        for (int i = 0; i < list.size(); i++) {
+            cout << list[i] << " ";
+        }
+        cout << endl;
+
+         
+        list.insert(15, 1);
+        cout << "Елементи після вставки 15 на 1-й індекс: ";
+        for (int i = 0; i < list.size(); i++) {
+           cout << list[i] << " ";
+        }
+       cout << endl;
+
+         
+        list.removeAt(2);
+        cout << "Елементи після видалення 2-го індексу: ";
+        for (int i = 0; i < list.size(); i++) {
+            cout << list[i] << " ";
+        }
+        cout << endl;
+
+         
+        list.pop_back();
+        cout << "Елементи після видалення останнього елемента: ";
+        for (int i = 0; i < list.size(); i++) {
+            cout << list[i] << " ";
+        }
+        cout << endl;
+
+        // Очищення списку
+        while (list.size() > 0) {
+            list.pop_back();
+        }
+        cout << "Розмір після очищення: " << list.size() << endl;
+
+        return 0;
     return 0;
 }
