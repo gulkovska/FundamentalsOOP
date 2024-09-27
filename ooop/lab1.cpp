@@ -585,8 +585,32 @@ public:
         }
     }
     
+    // Швидке сортування
+    void quicksort(int low, int high) {
+        if (low < high) {
+            int pi = partition(low, high);
+            quicksort(low, pi - 1);
+            quicksort(pi + 1, high);
+        }
+    }
+    
 private:
     vector<T>& arr;
+    
+    // Допоміжна функція для швидкого сортування
+    int partition(int low, int high) {
+        T pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr[i], arr[j]);
+            }
+        }
+        swap(arr[i + 1], arr[high]);
+        return i + 1;
+    }
 };
 
 
@@ -806,12 +830,19 @@ int main()
        cout << endl;
 */
         
-       sorter.selectionSort();
+       /*sorter.selectionSort();
        cout << "Масив після сортування вибором: ";
        for (int num : data) {
            cout << num << " ";
        }
        cout << endl;
-
+*/
+    sorter.quicksort(0, data.size() - 1);
+    cout << "Масив після швидкого сортування: ";
+    for (int num : data) {
+        cout << num << " ";
+    }
+    cout << endl;
+    
     return 0;
 }
