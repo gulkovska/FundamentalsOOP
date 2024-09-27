@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -485,6 +486,64 @@ void ArrayList<T>::resize() {
 }
 
 
+// Клас "Масив" на основі vector
+template<typename T>
+class MyArray {
+private:
+    vector<T> data;
+
+public:
+    // Додавання елемента в кінець масиву
+    void push_back(T value) {
+        data.push_back(value);
+    }
+
+    // Видалення елемента з кінця масиву
+    void pop_back() {
+        if (data.empty()) {
+            throw out_of_range("Масив порожній, неможливо видалити елемент.");
+        }
+        data.pop_back();
+    }
+
+    // Доступ до елемента за індексом
+    T& operator[](int index) {
+        if (index < 0 || index >= data.size()) {
+            throw out_of_range("Індекс за межами масиву.");
+        }
+        return data[index];
+    }
+
+    // Отримання розміру масиву
+    int size() const {
+        return data.size();
+    }
+
+    // Перевірка на порожність масиву
+    bool empty() const {
+        return data.empty();
+    }
+
+    // Очищення всього масиву
+    void clear() {
+        data.clear();
+    }
+
+    // Виведення вмісту масиву
+    void print() const {
+        for (const T& elem : data) {
+            cout << elem << " ";
+        }
+        cout << endl;
+    }
+};
+
+
+
+
+
+
+
 int main()
 {
    /* List<int> lst;
@@ -603,7 +662,7 @@ int main()
     
    
         
-        ArrayList<int> list;
+     /*   ArrayList<int> list;
 
  
         list.push_back(10);
@@ -644,7 +703,32 @@ int main()
             list.pop_back();
         }
         cout << "Розмір після очищення: " << list.size() << endl;
+*/
+    
+    MyArray<int> arr;
 
-        return 0;
+        
+       arr.push_back(10);
+       arr.push_back(20);
+       arr.push_back(30);
+
+       cout << "Елементи масиву: ";
+       arr.print();
+
+       
+       cout << "Елемент за індексом 1: " << arr[1] << endl;
+
+       
+       arr.pop_back();
+       cout << "Елементи після видалення останнього: ";
+       arr.print();
+
+        
+       cout << "Масив порожній? " << (arr.empty() ? "Так" : "Ні") << endl;
+
+        
+       arr.clear();
+       cout << "Масив очищено. Порожній? " << (arr.empty() ? "Так" : "Ні") << endl;
+
     return 0;
 }
