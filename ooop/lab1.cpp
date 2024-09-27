@@ -708,8 +708,51 @@ public:
     }
 };
 
+class CountSorter {
+private:
+    vector<int> inputArray;
+public:
+     
+    CountSorter(const vector<int>& arr) : inputArray(arr) {}
 
+    
+    vector<int> sort() {
+        int N = inputArray.size();
 
+         
+        int M = *max_element(inputArray.begin(), inputArray.end());
+
+         
+        vector<int> countArray(M + 1, 0);
+
+         
+        for (int i = 0; i < N; i++) {
+            countArray[inputArray[i]]++;
+        }
+
+        
+        for (int i = 1; i <= M; i++) {
+            countArray[i] += countArray[i - 1];
+        }
+
+         
+        vector<int> outputArray(N);
+        for (int i = N - 1; i >= 0; i--) {
+            outputArray[countArray[inputArray[i]] - 1] = inputArray[i];
+            countArray[inputArray[i]]--;
+        }
+
+        return outputArray;
+    }
+
+    
+    void printArray(const vector<int>& arr) const {
+        for (const auto& el : arr) {
+            cout << el << " ";
+        }
+        cout << endl;
+    }
+};
 
  int main()
 {
@@ -949,7 +992,7 @@ public:
     cout << endl;*/
      
     
-     vector<float> v = { 0.3465, 0.632, 0.667, 0.565, 0.1253, 0.667, 0.888 };
+    /* vector<float> v = { 0.3465, 0.632, 0.667, 0.565, 0.1253, 0.667, 0.888 };
 
      
      BucketSorter sorter(v);
@@ -958,8 +1001,14 @@ public:
      sorter.bucketSort();
 
     
-     sorter.printArray();
+     sorter.printArray();*/
+     
+     
+     vector<int> inputArray = { 4, 3, 12, 1, 5, 5, 3, 9 };
+     CountSorter sorter(inputArray);
+     vector<int> outputArray = sorter.sort();
+     sorter.printArray(outputArray);
 
-      
+     
     return 0;
 }
