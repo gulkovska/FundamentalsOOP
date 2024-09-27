@@ -663,8 +663,55 @@ private:
 };
 
 
+//швидкі алгоритми
+ 
+class BucketSorter {
+private:
+    vector<float> arr;
 
-int main()
+public:
+    
+    BucketSorter(const vector<float>& inputArr) : arr(inputArr) {}
+
+    
+    void bucketSort() {
+        int n = arr.size();
+        vector<vector<float>> b(n);
+
+        // Розподіл елементів по кошиках
+        for (int i = 0; i < n; ++i) {
+            int bucketIndex = n * arr[i]; // Індекс кошика
+            b[bucketIndex].push_back(arr[i]);
+        }
+
+        // Сортування кожного кошика
+        for (auto& bucket : b) {
+            sort(bucket.begin(), bucket.end());
+        }
+
+        //Об'єднання в єдиний відсортований масив
+        int index = 0;
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < b[i].size(); ++j) {
+                arr[index++] = b[i][j];
+            }
+        }
+    }
+
+    
+    void printArray() const {
+        cout << "The array after sorting is: " << endl;
+        for (const auto& it : arr) {
+            cout << it << ' ';
+        }
+        cout << endl;
+    }
+};
+
+
+
+
+ int main()
 {
    /* List<int> lst;
     
@@ -850,7 +897,7 @@ int main()
        arr.clear();
        cout << "Масив очищено. Порожній? " << (arr.empty() ? "Так" : "Ні") << endl;
 */
-    vector<int> data = {5, 2, 9, 1, 5, 6};
+  /*  vector<int> data = {5, 2, 9, 1, 5, 6};
 
          
         Sorter<int> sorter(data);
@@ -860,7 +907,7 @@ int main()
             cout << num << " ";
         }
         cout << endl;
-
+*/
          
      /*   sorter.insertionSort();
         cout << "Масив після сортування: ";
@@ -894,13 +941,25 @@ int main()
     cout << endl;
     */
     
-    sorter.mergeSort(0, data.size() - 1);
+  /*  sorter.mergeSort(0, data.size() - 1);
     cout << "Масив після сортування злиттям: ";
     for (int num : data) {
         cout << num << " ";
     }
-    cout << endl;
+    cout << endl;*/
      
     
+     vector<float> v = { 0.3465, 0.632, 0.667, 0.565, 0.1253, 0.667, 0.888 };
+
+     
+     BucketSorter sorter(v);
+
+     
+     sorter.bucketSort();
+
+    
+     sorter.printArray();
+
+      
     return 0;
 }
