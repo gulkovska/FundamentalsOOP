@@ -559,6 +559,32 @@ public:
         }
     }
     
+    // Сортування бульбашкою
+    void bubbleSort() {
+        int n = arr.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr[j], arr[j + 1]);
+                }
+            }
+        }
+    }
+
+    // Сортування вибором
+    void selectionSort() {
+        int n = arr.size();
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            swap(arr[i], arr[minIndex]);
+        }
+    }
+    
 private:
     vector<T>& arr;
 };
@@ -763,16 +789,29 @@ int main()
         cout << endl;
 
          
-        sorter.insertionSort();
-
-         
+     /*   sorter.insertionSort();
         cout << "Масив після сортування: ";
         for (int num : data) {
             cout << num << " ";
         }
-        cout << endl;
+        cout << endl;*/
 
     
-    
+     
+     /*  sorter.bubbleSort();
+       cout << "Масив після сортування бульбашкою: ";
+       for (int num : data) {
+           cout << num << " ";
+       }
+       cout << endl;
+*/
+        
+       sorter.selectionSort();
+       cout << "Масив після сортування вибором: ";
+       for (int num : data) {
+           cout << num << " ";
+       }
+       cout << endl;
+
     return 0;
 }
