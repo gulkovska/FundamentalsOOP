@@ -754,6 +754,99 @@ public:
     }
 };
 
+
+
+
+// Механізм для динамічного підключення нових алгоритмів сортування
+template<typename T>
+class ISortAlgorithm {
+public:
+    virtual void sort(vector<T>& arr) = 0;
+    //деструктор
+    virtual ~ISortAlgorithm() = default;
+};
+// Реалізація бульбашкового сортування
+template<typename T>
+class BubbleSortAlg : public ISortAlgorithm<T> {
+public:
+    void sort(vector<T>& arr) override {
+        int n = arr.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap(arr[j], arr[j + 1]);
+                }
+            }
+        }
+    }
+};
+// Реалізація швидкого сортування
+template<typename T>
+class QuickSortAlg : public ISortAlgorithm<T> {
+public:
+    void sort(vector<T>& arr) override {
+        quicksort(arr, 0, arr.size() - 1);
+    }
+
+private:
+    void quicksort(vector<T>& arr, int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+            quicksort(arr, low, pi - 1);// cортування лівої частини
+            quicksort(arr, pi + 1, high);// cортування правої частини
+        }
+    }
+    
+    // Метод для поділу масиву на частини
+    int partition(vector<T>& arr, int low, int high) {
+        T pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                swap(arr[i], arr[j]);
+            }
+        }
+        swap(arr[i + 1], arr[high]);
+        return i + 1;
+    }
+};
+
+// Клас для використання нового механізму
+template<typename T>
+class SortManager {
+private:
+    vector<T>& data;
+    unique_ptr<ISortAlgorithm<T>> algorithm;
+
+public:
+    // Конструктор
+    SortManager(vector<T>& data) : data(data) {}
+//вибір алгоритму сортування
+    void setAlgorithm(unique_ptr<ISortAlgorithm<T>> alg) {
+        algorithm = move(alg);
+    }
+
+    void sort() {
+        if (algorithm) {
+            algorithm->sort(data);
+        } else {
+            cout << "Алгоритм сортування не вибраний!" << endl;
+        }
+    }
+
+    void printArray() const {
+        for (const T& elem : data) {
+            cout << elem << " ";
+        }
+        cout << endl;
+    }
+};
+
+
+
+
  int main()
 {
    /* List<int> lst;
