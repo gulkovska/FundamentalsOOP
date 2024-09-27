@@ -539,8 +539,29 @@ public:
 };
 
 
-
-
+template<typename T>
+class Sorter {
+public:
+    Sorter(vector<T>& data) : arr(data) {}
+    
+    // Сортування вставками
+    void insertionSort() {
+        int n = arr.size();
+        for (int i = 1; i < n; i++) {
+            T key = arr[i];
+            int j = i - 1;
+            
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+    }
+    
+private:
+    vector<T>& arr;
+};
 
 
 
@@ -705,7 +726,7 @@ int main()
         cout << "Розмір після очищення: " << list.size() << endl;
 */
     
-    MyArray<int> arr;
+  /*  MyArray<int> arr;
 
         
        arr.push_back(10);
@@ -729,6 +750,29 @@ int main()
         
        arr.clear();
        cout << "Масив очищено. Порожній? " << (arr.empty() ? "Так" : "Ні") << endl;
+*/
+    vector<int> data = {5, 2, 9, 1, 5, 6};
 
+         
+        Sorter<int> sorter(data);
+    
+        cout << "Масив до сортування: ";
+        for (int num : data) {
+            cout << num << " ";
+        }
+        cout << endl;
+
+         
+        sorter.insertionSort();
+
+         
+        cout << "Масив після сортування: ";
+        for (int num : data) {
+            cout << num << " ";
+        }
+        cout << endl;
+
+    
+    
     return 0;
 }
