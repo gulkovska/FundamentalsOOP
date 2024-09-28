@@ -920,6 +920,23 @@ public:
 };
 
 
+// Клас для формул
+class Formula {
+public:
+    string expression;  // Рядок для збереження формули
+    
+    // Метод для перетворення формули у рядковий формат
+    string toString() const {
+        return "Formula: " + expression + "\n";
+    }
+    // Статичний метод для генерації випадкової формули
+    static Formula generateRandomFormula() {
+        Formula formula;
+        formula.expression = "E = mc^2"; // Випадкова формула (у даному випадку фіксована)
+        return formula;
+    }
+};
+
 int main()
 {
    /* List<int> lst;
@@ -1194,6 +1211,12 @@ int main()
         // Виведення таблиці на екран
         cout << table.toString();
 
+    // Генерація випадкової формули
+        Formula formula = Formula::generateRandomFormula();
+        
+        // Виведення формули на екран
+         cout << formula.toString();
+    
     return 0;
     
     
