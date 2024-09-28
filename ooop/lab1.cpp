@@ -876,6 +876,24 @@ public:
         return list;
     }
 };
+class Image {
+public:
+    string fileName;  // Назва файлу зображення
+    string caption;   // Підпис до зображення
+
+    // Метод для перетворення зображення у рядок
+        string toString() const {
+        return "Image: " + fileName + "\nCaption: " + caption + "\n";
+    }
+
+    // Статичний метод для генерації випадкового зображення
+    static Image generateRandomImage() {
+        Image image;
+        image.fileName = "image1.png";  // задана назва файлу
+        image.caption = "Random Image Caption";  //  заданий підпис
+        return image;
+    }
+};
 
 
  int main()
@@ -1140,5 +1158,10 @@ public:
          // Виведення списку на екран
          cout << list.toString();
      
+     // Генерація випадкового зображення
+        Image img = Image::generateRandomImage();
+        
+        // Виведення зображення на екран
+         cout << img.toString();
     return 0;
 }
