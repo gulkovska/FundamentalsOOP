@@ -937,6 +937,27 @@ public:
     }
 };
 
+// Клас для представлення посилань на джерела
+class Reference {
+public:
+     string source;        // URL або інше джерело
+     string description;   // Опис джерела
+
+    // Метод для перетворення посилання у рядковий формат
+     string toString() const {
+        return "Reference: " + source + "\nDescription: " + description + "\n";
+    }
+
+    // Статичний метод для генерації випадкового посилання
+    static Reference generateRandomReference() {
+        Reference reference;
+        reference.source = "https://example.com";         // Випадкове джерело
+        reference.description = "Example Source";         // Випадковий опис
+        return reference;
+    }
+};
+
+
 int main()
 {
    /* List<int> lst;
@@ -1217,6 +1238,12 @@ int main()
         // Виведення формули на екран
          cout << formula.toString();
     
+    // Генерація випадкового посилання
+       Reference ref = Reference::generateRandomReference();
+       
+       // Виведення посилання на екран
+        cout << ref.toString();
+
     return 0;
     
     
