@@ -895,8 +895,32 @@ public:
     }
 };
 
+// Клас для таблиць
+class Table {
+public:
+     vector<vector<string>> data;
+    // Метод для перетворення таблиці у рядковий формат
+    string toString() const {
+         string result = "Table:\n";
+        
+        for (const auto& row : data) { //прохід по кожному рядку таблиці
+            for (const auto& cell : row) { //  // Прохід по кожній клітинці в рядку
+                result += cell + " "; // Додаю клітинку та пробіл між клітинками
+                           }
+            result += "\n"; // перехід на новий рядок
+        }
+        return result;
+    }
 
- int main()
+    static Table generateRandomTable() { //Статичний метод для генерації випадкової таблиці
+        Table table;
+        table.data = {{"Cell1", "Cell2"}, {"Cell3", "Cell4"}};// два рядки таблиці з двома клітинками у кожному
+        return table;
+    }
+};
+
+
+int main()
 {
    /* List<int> lst;
     
@@ -1163,5 +1187,14 @@ public:
         
         // Виведення зображення на екран
          cout << img.toString();
+    
+    // Генерація випадкової таблиці
+        Table table = Table::generateRandomTable();
+        
+        // Виведення таблиці на екран
+        cout << table.toString();
+
     return 0;
+    
+    
 }
