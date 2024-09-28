@@ -847,6 +847,37 @@ public:
 
 
 
+
+
+
+
+// Клас для списку, який містить елементи у вигляді рядків
+class Listt {
+public:
+    vector<string> items;
+    // Метод toString перетворює список у рядковий формат для відображення
+        string toString() const {
+        string result = "List:\n";
+            
+            // Для кожного елемента списку додаю рядок з префіксом "-"
+            for (const auto& item : items) {
+            result += "- " + item + "\n";
+        }
+        return result;
+    }
+    // Статичний метод для генерації випадкового списку
+       static Listt generateRandomList() {
+        Listt list;
+        
+        // Додаю три випадкові елементи до списку
+        list.items.push_back("Item 1");
+        list.items.push_back("Item 2");
+        list.items.push_back("Item 3");
+        return list;
+    }
+};
+
+
  int main()
 {
    /* List<int> lst;
@@ -1097,11 +1128,17 @@ public:
      sorter.printArray();*/
      
      
-     vector<int> inputArray = { 4, 3, 12, 1, 5, 5, 3, 9 };
+    /* vector<int> inputArray = { 4, 3, 12, 1, 5, 5, 3, 9 };
      CountSorter sorter(inputArray);
      vector<int> outputArray = sorter.sort();
-     sorter.printArray(outputArray);
+     sorter.printArray(outputArray);*/
+     
+     
+     // Генерація випадкового списку
+         Listt list = Listt::generateRandomList();
 
+         // Виведення списку на екран
+         cout << list.toString();
      
     return 0;
 }
