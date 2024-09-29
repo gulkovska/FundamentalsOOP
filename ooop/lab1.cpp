@@ -13,7 +13,7 @@
 
 using namespace std;
 
- 
+ //перелік 1, варіант 2.
 // Однозв'язний список
 template<typename T>
 class List
@@ -540,7 +540,7 @@ public:
     }
 };
 
-
+//сортування
 template<typename T>
 class Sorter {
 public:
@@ -665,7 +665,7 @@ private:
 };
 
 
-//швидкі алгоритми
+//швидкі алгоритми сортування
  
 class BucketSorter {
 private:
@@ -721,10 +721,10 @@ public:
     vector<int> sort() {
         int N = inputArray.size();
 
-         
+         //пошук найбільшого елемента
         int M = *max_element(inputArray.begin(), inputArray.end());
 
-         
+         //допоміжний масив
         vector<int> countArray(M + 1, 0);
 
          
@@ -738,7 +738,7 @@ public:
         }
 
          
-        vector<int> outputArray(N);
+        vector<int> outputArray(N);//масив, де зберігаються відсортовані елементи
         for (int i = N - 1; i >= 0; i--) {
             outputArray[countArray[inputArray[i]] - 1] = inputArray[i];
             countArray[inputArray[i]]--;
@@ -851,7 +851,7 @@ public:
 
 
 
-
+//перелік 2, варіант 6.
 
 // Клас для списку, який містить елементи у вигляді рядків
 class Listt {
@@ -1408,12 +1408,12 @@ int main()
        Document doc = Document::generateRandomDocument();
        
        // Виведення документу на екран
-       std::cout << "Generated Document:\n";
-       std::cout << doc.toString();
+       cout << "Generated Document:\n";
+       cout << doc.toString();
        
        // Перевірка документа на помилки
-       std::string validationReport = doc.validate();
-       std::cout << "\nValidation Report:\n" << validationReport;
+        string validationReport = doc.validate();
+       cout << "\nValidation Report:\n" << validationReport;
     
     return 0;
     
