@@ -8,6 +8,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
+
 
 using namespace std;
 
@@ -1016,6 +1018,94 @@ public:
 };
 
 
+// Клас для представлення документа
+class Document {
+public:
+    TitlePage titlePage; // Титульна сторінка документа
+    vector<Section> sections; // Масив секцій документа
+    vector<Reference> references; // Масив посилань документа
+
+    // Метод для конвертації документа у рядкове представлення
+    string toString() const {
+        
+        string result = titlePage.toString();
+
+        
+        for (const auto& section : sections) {
+            result += section.toString();
+        }
+
+        
+        result += "\nReferences:\n";
+        for (const auto& reference : references) {
+            result += reference.toString();
+        }
+
+        return result;
+    }
+
+    // Статичний метод для генерації випадкового документа
+    static Document generateRandomDocument() {
+        Document doc;
+        // Генерація "випадкової" титульної сторінки
+        doc.titlePage = TitlePage::generateRandomTitlePage();
+
+        // Генерація "випадкової" секції та додавання її до масиву секцій
+        doc.sections.push_back(Section::generateRandomSection());
+
+        // Генерація "випадкового" посилання та додавання його до масиву посилань
+        doc.references.push_back(Reference::generateRandomReference());
+
+        return doc;
+    }
+
+    // Метод для валідації документа і перевірки на помилки
+        string validate() const {
+        ostringstream report; // Об'єкт для збереження звіту про помилки
+        bool hasErrors = false;
+
+        // Перевірка титульної сторінки
+        if (titlePage.title.empty()) {
+            report << "Error: Title is empty.\n"; // Якщо заголовок порожній
+            hasErrors = true;
+        }
+        if (titlePage.author.empty()) {
+            report << "Error: Author is empty.\n"; // Якщо автор порожній
+            hasErrors = true;
+        }
+
+        // Перевірка секцій документа
+        for (const auto& section : sections) {
+            if (section.title.empty()) {
+                report << "Error: Section title is empty.\n"; // Якщо заголовок секції порожній
+                hasErrors = true;
+            }
+            if (section.paragraphs.size() < 1) {
+                report << "Error: Section '" << section.title << "' has no paragraphs.\n"; // Якщо в секції немає параграфів
+                hasErrors = true;
+            }
+            // Перевірка наявності зображень і підписів до них
+            if (section.image.fileName.empty() || section.image.caption.empty()) {
+                report << "Error: Section '" << section.title << "' has an invalid image.\n"; // Якщо зображення або підпис порожній
+                hasErrors = true;
+            }
+        }
+
+        // Перевірка наявності посилань
+        if (references.empty()) {
+            report << "Error: No references found.\n"; // Якщо немає жодного посилання
+            hasErrors = true;
+        }
+
+        // Якщо помилок немає
+        if (!hasErrors) {
+            report << "No errors found.\n";
+        }
+
+        return report.str(); // Повертаємо звіт про помилки
+    }
+};
+
 int main()
 {
    /* List<int> lst;
@@ -1303,7 +1393,7 @@ int main()
         cout << ref.toString();
     */
     // Генеруємо випадкову секцію
-        Section randomSection = Section::generateRandomSection();
+    /*    Section randomSection = Section::generateRandomSection();
         
         // Виводимо на екран результат перетворення секції у рядок
          cout << randomSection.toString() << endl;
@@ -1313,7 +1403,18 @@ int main()
         
         // Виводимо на екран результат перетворення титульної сторінки у рядок
        cout << randomTitlePage.toString() << endl;
-
+*/
+    // Генерація випадкового документа
+       Document doc = Document::generateRandomDocument();
+       
+       // Виведення документу на екран
+       std::cout << "Generated Document:\n";
+       std::cout << doc.toString();
+       
+       // Перевірка документа на помилки
+       std::string validationReport = doc.validate();
+       std::cout << "\nValidation Report:\n" << validationReport;
+    
     return 0;
     
     
