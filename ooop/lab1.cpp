@@ -957,6 +957,43 @@ public:
     }
 };
 
+// Клас для секцій документа
+class Section {
+public:
+    string title;  // Назва секції
+    vector<string> paragraphs;  // Вектор текстових абзаців у секції
+    Listt list;  // Список
+    Image image;  // Зображення з підписом
+    Table table;  // Таблиця з даними
+    Formula formula;  //  формула
+
+    // Метод для перетворення секції в рядок (формат для виведення)
+    string toString() const {
+        string result = "Section: " + title + "\n";
+        for (const auto& paragraph : paragraphs) {
+            result += paragraph + "\n";
+        }
+        result += list.toString();
+        result += image.toString();
+        result += table.toString();
+        result += formula.toString();
+        return result;
+    }
+
+    // Статичний метод для генерації випадкової секції
+    static Section generateRandomSection() {
+        Section section;
+        section.title = "Random Section Title";  // "Випадкова" назва секції
+        section.paragraphs.push_back("Random paragraph 1...");  // Додаємо "випадковий" абзац
+        section.paragraphs.push_back("Random paragraph 2...");  // Додаємо ще один "випадковий" абзац
+        section.list = Listt::generateRandomList();  //   "випадковий" список
+        section.image = Image::generateRandomImage();  //  "випадкове" зображення
+        section.table = Table::generateRandomTable();  //"випадкова" таблиця
+        section.formula = Formula::generateRandomFormula();  //  "випадкова" формула
+        return section;   
+    }
+};
+
 
 int main()
 {
@@ -1214,7 +1251,7 @@ int main()
      sorter.printArray(outputArray);*/
      
      
-     // Генерація випадкового списку
+  /*   // Генерація випадкового списку
          Listt list = Listt::generateRandomList();
 
          // Виведення списку на екран
@@ -1243,7 +1280,12 @@ int main()
        
        // Виведення посилання на екран
         cout << ref.toString();
-
+    */
+    // Генеруємо випадкову секцію
+        Section randomSection = Section::generateRandomSection();
+        
+        // Виводимо на екран результат перетворення секції у рядок
+         cout << randomSection.toString() << std::endl;
     return 0;
     
     
