@@ -990,7 +990,28 @@ public:
         section.image = Image::generateRandomImage();  //  "випадкове" зображення
         section.table = Table::generateRandomTable();  //"випадкова" таблиця
         section.formula = Formula::generateRandomFormula();  //  "випадкова" формула
-        return section;   
+        return section;
+    }
+};
+
+// Клас для титульної сторінки
+class TitlePage {
+public:
+    string title; //назва документу
+   
+    string author;// автор документа
+    
+    // Метод для перетворення інформації про титульну сторінку в рядковий формат
+        string toString() const {
+        return "Title: " + title + "\nAuthor: " + author + "\n";
+    }
+    
+    // Статичний метод для генерації випадкової титульної сторінки
+    static TitlePage generateRandomTitlePage() {
+        TitlePage titlePage;
+        titlePage.title = "Random Title"; //"випадковий" заголовок
+        titlePage.author = "Random Author"; // "випадковий" автор
+        return titlePage;
     }
 };
 
@@ -1285,7 +1306,14 @@ int main()
         Section randomSection = Section::generateRandomSection();
         
         // Виводимо на екран результат перетворення секції у рядок
-         cout << randomSection.toString() << std::endl;
+         cout << randomSection.toString() << endl;
+    
+    // Генеруємо випадкову титульну сторінку
+        TitlePage randomTitlePage = TitlePage::generateRandomTitlePage();
+        
+        // Виводимо на екран результат перетворення титульної сторінки у рядок
+       cout << randomTitlePage.toString() << endl;
+
     return 0;
     
     
